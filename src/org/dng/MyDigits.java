@@ -51,6 +51,7 @@ public class MyDigits {
         char[] inValue = val.toCharArray();
         for (char c :inValue) {
             if (!romeDigits.contains( String.valueOf(c) )) return false;
+//            String myStr = Character.toString(c);
         }
 
         return true;
