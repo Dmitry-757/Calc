@@ -21,6 +21,9 @@ public class Calc {
 
         System.out.println("search in HashSet... inputed value is Rome digit = "+MyDigits.IsItRomeDigitHash(str));
 
+        //******** Transform Roman number to human ;) *******
+
+        //***************************************************
         return true;
     }
 
