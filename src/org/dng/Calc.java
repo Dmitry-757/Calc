@@ -11,15 +11,18 @@ public class Calc {
 
 
     static boolean input(){
-        System.out.println("tape something!");
-        String str=in.next();
+        System.out.println("input expression!");
+        //String str=in.next();
+        String str=in.nextLine();
         in.close();
         System.out.println("you taped: "+str);
 
         //*** testing input value ****
-        System.out.println("inputed value is Rome digit = "+MyDigits.IsItRomeDigit(str));
 
-        System.out.println("search in HashSet... inputed value is Rome digit = "+MyDigits.IsItRomeDigitHash(str));
+        System.out.println("search in HashSet... inputed value is Rome digit = "+MyDigits.IsItRomeDigit(str));
+        System.out.println("search in HashMap... inputed value is Rome digit = "+MyDigits.IsItRomeDigitM(str));
+
+        System.out.println("test isDigit... inputed value is Arab digit = "+MyDigits.IsItArabDigit(str));
 
         //******** Transform Roman number to human ;) *******
 
