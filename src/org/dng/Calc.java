@@ -21,9 +21,9 @@ public class Calc {
 
         System.out.println("search in HashSet... inputed value is Rome digit = "+MyDigits.IsItRomeDigit(str));
         System.out.println("search in HashMap... inputed value is Rome digit = "+MyDigits.IsItRomeDigitM(str));
-
         System.out.println("test isDigit... inputed value is Arab digit = "+MyDigits.IsItArabDigit(str));
 
+        if (MyDigits.IsItRomeDigitM(str)) MyDigits.Rome2ArabTranslation(str);
         //******** Transform Roman number to human ;) *******
 
         //***************************************************

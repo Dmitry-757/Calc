@@ -1,5 +1,6 @@
 package org.dng;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -67,6 +68,13 @@ public class MyDigits {
         char[] inValue = val.toCharArray();
         for (char c : inValue){
 
+        }
+        for (int i = (inValue.length-1); i>=0 ; i--) {
+            System.out.println("haracter.toUpperCase(inValue[i] = "+Character.toUpperCase(inValue[i]));
+//            System.out.println( romeDigitsM.get('X') );
+            System.out.println("romeDigitsM.get(Character.toUpperCase(inValue[i])) = "+romeDigitsM.get(Character.toUpperCase(inValue[i])));
+            rez+=romeDigitsM.get(Character.toUpperCase(inValue[i]));
+            System.out.println("inputed number is "+rez);
         }
 
         return rez;
