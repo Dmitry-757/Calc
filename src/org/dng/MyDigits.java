@@ -43,6 +43,11 @@ public class MyDigits {
         romeDigitsM2.put("XIII",13);
         romeDigitsM2.put("XIV",14);
         romeDigitsM2.put("XV",15);
+        romeDigitsM2.put("XVI",16);
+        romeDigitsM2.put("XVII",17);
+        romeDigitsM2.put("XVIII",18);
+        romeDigitsM2.put("XIX",19);
+        romeDigitsM2.put("XX",20);
 
         romeDigitsM2.put("L",50);
         romeDigitsM2.put("C",100);
