@@ -1,13 +1,12 @@
 package org.dng;
 
-import java.sql.SQLOutput;
-import java.util.HashMap;
-import java.util.HashSet;
+
+import java.util.*;
+
 
 public class MyDigits {
     private static HashSet<Character> romeDigits;
     private static HashMap<Character, Integer> romeDigitsM;
-    private static HashMap<String, Integer> romeDigitsM2;
 
     private static HashSet<Character> arithmetical;
 
@@ -16,7 +15,10 @@ public class MyDigits {
         romeDigits.add('I');
         romeDigits.add('V');
         romeDigits.add('X');
-//        romeDigits.add('L');//50
+        romeDigits.add('L');//50
+        romeDigits.add('C');//100
+        romeDigits.add('D');//500
+        romeDigits.add('M');//1000
 
         romeDigitsM = new HashMap<>();
         romeDigitsM.put('I',1);
@@ -27,32 +29,6 @@ public class MyDigits {
         romeDigitsM.put('D',500);
         romeDigitsM.put('M',1000);
 
-        romeDigitsM2 = new HashMap<>();
-        romeDigitsM2.put("I",1);
-        romeDigitsM2.put("II",2);
-        romeDigitsM2.put("III",3);
-        romeDigitsM2.put("IV",4);
-        romeDigitsM2.put("V",5);
-        romeDigitsM2.put("VI",6);
-        romeDigitsM2.put("VII",7);
-        romeDigitsM2.put("VIII",8);
-        romeDigitsM2.put("IX",9);
-        romeDigitsM2.put("X",10);
-        romeDigitsM2.put("XI",11);
-        romeDigitsM2.put("XII",12);
-        romeDigitsM2.put("XIII",13);
-        romeDigitsM2.put("XIV",14);
-        romeDigitsM2.put("XV",15);
-        romeDigitsM2.put("XVI",16);
-        romeDigitsM2.put("XVII",17);
-        romeDigitsM2.put("XVIII",18);
-        romeDigitsM2.put("XIX",19);
-        romeDigitsM2.put("XX",20);
-
-        romeDigitsM2.put("L",50);
-        romeDigitsM2.put("C",100);
-        romeDigitsM2.put("D",500);
-        romeDigitsM2.put("M",1000);
 
         arithmetical = new HashSet<>();
         arithmetical.add(' ');
@@ -61,7 +37,17 @@ public class MyDigits {
         arithmetical.add('*');
         arithmetical.add('/');
 
+    }
 
+
+    static boolean IsItRomeDigit1 (String val){
+        val=val.toUpperCase();
+//        if(val.matches(".*[0-9].*") || !val.matches("[M|D|C|L|X|V|I]*")){
+        if(!val.matches("[MDCLXVI]*")){
+            System.out.println("Impossible to convert. Wrong roman numeral");
+            return false;
+        }
+        return true;
     }
 
 
@@ -115,4 +101,47 @@ public class MyDigits {
         return rez;
     }
 
-}
+
+    static int value(char a) {
+//        if (a=='M') return 1000;
+//        else if (a=='D') return 500;
+//        else if (a=='C') return 100;
+//        else if (a=='L') return 50;
+//        else if (a=='X') return 10;
+//        else if (a=='V') return 5;
+//        else if (a=='I') return 1;
+//        else return 0;
+
+        return romeDigitsM.get(a);
+    }
+
+    static int Rome2ArabTranslation2(String roman){
+//        roman=roman.toLowerCase();
+        int val=0;
+        int val_next=0;
+        int temp=0;
+        int result=0;
+
+        for (int i=0;i<roman.length();i++) {
+            val=value(roman.charAt(i));
+            if (i<roman.length()-1) {
+                val_next=value(roman.charAt(i+1));
+            } else val_next=0;
+
+            if (val_next==0) {
+                temp=val;
+            } else {
+                if (val>val_next) temp=val;
+                else if (val<val_next) {
+                    temp=val_next-val;
+                    i++;
+                } else if (val==val_next) temp=val;
+            }
+            result+=temp;
+        }
+        System.out.println("Result is: " + result);
+        return result;
+    }
+
+
+    }
