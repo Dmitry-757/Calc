@@ -1,6 +1,8 @@
 package org.dng;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 enum RomanNumeral {
@@ -58,7 +60,7 @@ public class Calc {
             }
             result+=temp;
         }
-        System.out.println("Result is: " + result);
+//        System.out.println("Result is: " + result);
         return result;
     }
 
@@ -88,10 +90,24 @@ public class Calc {
 
     }
 
-
+    static int Calculate(int num1, int num2, char operDesignation){
+        switch (operDesignation){
+            case '+':
+                return(num1+num2);
+            case '-':
+                return(num1-num2);
+            case '*':
+                return(num1*num2);
+            case '/':
+                return(num1/num2);
+            default:
+                System.out.println("somthing wrong during calculating!");
+        }
+        return 0;
+    }
 
     static boolean input(){
-//        System.out.println("RomanNumeral.valueOf(\"XL\")"+RomanNumeral.valueOf("CD").getValue());
+
 
         System.out.println("input expression!");
         String str=in.nextLine();
@@ -100,23 +116,79 @@ public class Calc {
 
         //*** testing input value ****
         int arabNumber=0;
-        str=str.toUpperCase();
-        if(str.matches("[MDCLXVI]*")){
-//            arabNumber=MyDigits.Rome2ArabTranslation2(str);
+        str=str.replace(" ","").toUpperCase();//убираем пробелы
+        System.out.println("you taped: "+str);
+
+        int result=0;
+
+//        if(str.matches("[MDCLXVI\\+\\-\\*\\/]*")  ){
+        if(str.matches("[MDCLXVI\\Q+-*/\\E]*")  ){ //все, что между \\Q и \\E экранируется
+            //System.out.println("str.matches passed");
+
+            //**** делаем расчленинград исходной строки на числа и знаки операций ***
+            String tmp;
+            int lastEnd=0;
+            char operDesignation='+';
+            String REGEX = "[\\Q+-*/\\E]";
+            String INPUT = str;
+            Pattern p = Pattern.compile(REGEX);
+            Matcher m = p.matcher(INPUT);   // получение matcher объекта
+
+            while (m.find()){
+                System.out.println("*********");
+                System.out.println("at pos "+m.start()+" find "+str.charAt(m.start()));
+
+
+                tmp=str.substring(lastEnd, m.start());
+                lastEnd=m.end();
+                System.out.println("tmp = "+tmp);
+
+                arabNumber=Rome2Arab(tmp);
+                System.out.println("last number = "+result);
+                System.out.println("operDesignation "+operDesignation);
+                System.out.println("Arab equals = "+arabNumber);
+
+
+                result=Calculate(result, arabNumber, operDesignation);
+                System.out.println("result = "+result);
+
+                operDesignation=str.charAt(m.start());
+
+                System.out.println("*********");
+            }
+
+            System.out.println("*********");
+            tmp=str.substring(lastEnd, str.length());
+            //System.out.println("at pos "+lastEnd+" find "+str.charAt(m.start()));
+            System.out.println("tmp = "+tmp);
+            arabNumber=Rome2Arab(tmp);
+
+            System.out.println("last number = "+result);
+            System.out.println("operDesignation "+operDesignation);
+            System.out.println("Arab equals = "+arabNumber);
+
+            result=Calculate(result, arabNumber, operDesignation);
+            System.out.println("result = "+result);
+
+            System.out.println("*********");
+
+
+            //******** Transform Roman number to human ;) *******
+/*
             arabNumber=Rome2Arab(str);
             System.out.println("Arab equals = "+arabNumber);
 
             arabNumber=Rome2Arab2(str);
             System.out.println("2 Arab equals = "+arabNumber);
+*/
 
         }
         else{
             System.out.println("WTF?! Wrong roman digits!");
-            throw new IllegalArgumentException("WTF?! Inputed digits in't roman !");
+            throw new IllegalArgumentException("WTF?! Inputed digits isn't roman !");
         }
 
 
-        //******** Transform Roman number to human ;) *******
 
         //***************************************************
         return true;

@@ -140,6 +140,8 @@ public class MyDigits {
             result+=temp;
         }
         System.out.println("Result is: " + result);
+
+
         return result;
     }
 
